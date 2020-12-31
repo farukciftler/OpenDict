@@ -1,25 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Pomelo.EntityFrameworkCore.MySql;
-using Microsoft.EntityFrameworkCore;
-using OpenDict.Models;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
 
 
 namespace OpenDict.Data
 {
     public class Context : DbContext
     {
-        public IConfiguration Configuration { get; }
 
 
-        public Context (DbContextOptions<Context> options, IConfiguration configuration)
+        public Context (DbContextOptions<Context> options)
             
         {
             Database.EnsureCreated();
-            Configuration = configuration;
 
         }
 
