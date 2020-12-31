@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -15,7 +15,26 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <None Include="wwwroot\assets\css\bootstrap-grid.css" />
+    <None Include="wwwroot\assets\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\assets\css\bootstrap-grid.min.css" />
+    <None Include="wwwroot\assets\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\assets\css\bootstrap-reboot.css" />
+    <None Include="wwwroot\assets\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\assets\css\bootstrap-reboot.min.css" />
+    <None Include="wwwroot\assets\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\assets\css\bootstrap.css" />
+    <None Include="wwwroot\assets\css\bootstrap.css.map" />
+    <None Include="wwwroot\assets\css\bootstrap.min.css" />
+    <None Include="wwwroot\assets\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\assets\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\assets\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\assets\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\assets\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\assets\js\bootstrap.js" />
+    <None Include="wwwroot\assets\js\bootstrap.js.map" />
+    <None Include="wwwroot\assets\js\bootstrap.min.js" />
+    <None Include="wwwroot\assets\js\bootstrap.min.js.map" />
   </ItemGroup>
 
 </Project>
