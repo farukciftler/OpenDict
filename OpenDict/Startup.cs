@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using OpenDict.Data;
 using MySql.Data.MySqlClient;
 using Pomelo.EntityFrameworkCore.MySql;
+using OpenDict.Helpers;
 
 namespace OpenDict
 {
@@ -33,6 +34,7 @@ namespace OpenDict
             services.AddMvc();
             services.AddSingleton<IConfiguration>(Configuration);
 
+            services.AddScoped<LocalizationHelper>();
 
             services.AddDbContext<Context>(options =>
             {

@@ -24,6 +24,8 @@ namespace OpenDict.Data
         }
 
         public DbSet<OpenDict.Models.LanguageModel> Language { get; set; }
+        public DbSet<OpenDict.Models.LocaleStringResourcesModel> LocaleStringResources { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySQL("Server=localhost;Database=OpenDict;Uid=root;");
