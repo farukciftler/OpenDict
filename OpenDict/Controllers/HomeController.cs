@@ -13,6 +13,10 @@ namespace OpenDict.Controllers
         // GET: HomeController
         public ActionResult Index()
         {
+            ViewBag.Brand = "opendict";
+
+
+
             return View();
         }
 

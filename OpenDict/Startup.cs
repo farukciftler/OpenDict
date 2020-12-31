@@ -29,6 +29,8 @@ namespace OpenDict
 
             services.AddControllers();
             services.AddMvc();
+            services.AddControllersWithViews()
+             .AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +54,9 @@ namespace OpenDict
                 pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-          
+
         }
     }
+  
+
 }

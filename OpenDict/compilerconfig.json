@@ -1,0 +1,7 @@
+[
+  {
+    "outputFile": "wwwroot/assets/css/custom/style.css",
+    "inputFile": "wwwroot/assets/css/custom/style.scss",
+    "sourceMap": false
+  }
+]
