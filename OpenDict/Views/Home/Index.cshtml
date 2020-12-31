@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using OpenDict.Helpers;
+@inject LocalizationHelper _localization;
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -6,6 +8,7 @@
     <title>Index</title>
 </head>
 <body> 
+    @_localization.T("common.test.teststring")
  
 </body>
 </html>
