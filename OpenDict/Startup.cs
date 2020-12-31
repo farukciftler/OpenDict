@@ -9,6 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using OpenDict.Data;
+using MySql.Data.MySqlClient;
+using Pomelo.EntityFrameworkCore.MySql;
 
 namespace OpenDict
 {
@@ -27,7 +31,16 @@ namespace OpenDict
 
             services.AddControllers();
             services.AddMvc();
+            services.AddSingleton<IConfiguration>(Configuration);
+
+
+            services.AddDbContext<Context>(options =>
+            {
+                options.UseMySQL("Server=localhost;Database=OpenDict;Uid=root;");
+                });
+           
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -38,7 +51,7 @@ namespace OpenDict
             }
 
             app.UseRouting();
-
+            
             app.UseAuthorization();
 
             app.UseStaticFiles();
