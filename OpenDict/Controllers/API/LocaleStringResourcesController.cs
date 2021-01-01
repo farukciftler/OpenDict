@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.EntityFrameworkCore;
+using OpenDict.Data;
+using OpenDict.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OpenDict.Controllers.API
 {
@@ -7,10 +11,18 @@ namespace OpenDict.Controllers.API
     [ApiController]
     public class LocaleStringResourcesController : ControllerBase
     {
-        [HttpGet]
-        public string Index()
+        private readonly Context _context;
+
+        public LocaleStringResourcesController (Context context)
         {
-            return "Merhaba";
+            _context = context;
+        }
+        
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<LocaleStringResourcesModel >>> GetLocaleStringResource()
+        {
+            return await _context.LocaleStringResources.ToListAsync();
         }
     }
 }
