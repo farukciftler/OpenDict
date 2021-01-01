@@ -27,6 +27,7 @@ namespace OpenDict
             services.AddSingleton<IConfiguration>(Configuration);
 
             services.AddScoped<LocalizationHelper>();
+            services.AddScoped<HttpHelper>();
 
             services.AddDbContext<Context>(options =>
             {
