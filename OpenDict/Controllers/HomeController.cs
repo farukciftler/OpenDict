@@ -14,7 +14,6 @@ namespace OpenDict.Controllers
         public ActionResult Index()
         {
             ViewBag.Brand = "opendict";
-            ViewBag.Title = "opendict | Home";
 
 
 
