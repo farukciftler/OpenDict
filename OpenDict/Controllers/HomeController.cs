@@ -16,9 +16,10 @@ namespace OpenDict.Controllers
         // GET: HomeController
         public ActionResult Index()
         {
-            List<LocaleStringResourcesModel> localeStringResources = new List<LocaleStringResourcesModel>();
+            /*List<LocaleStringResourcesModel> localeStringResources = new List<LocaleStringResourcesModel>();
             localeStringResources = httpHelper.GetApiEndpoint<List<LocaleStringResourcesModel>>("/localestringresources");
-            return View(localeStringResources);
+            return View(localeStringResources);*/
+            return View();
         }
 
     }

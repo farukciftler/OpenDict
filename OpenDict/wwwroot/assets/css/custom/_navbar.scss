@@ -1,0 +1,38 @@
+﻿$nav_stripe: #ff0000;
+$nav_stripe_heigt:10px;
+
+nav {
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        display: inline-block;
+    }
+
+    a {
+        display: block;
+        padding: 6px 12px;
+        text-decoration: none;
+    }
+
+    hr {
+        background-color: $nav_stripe;
+        border-width: 0;
+        height: $nav_stripe_heigt;
+        margin-top: 0px;
+    }
+}
+
+
+    .top-strip {
+
+    background-color: $nav_stripe;
+    border-width: 0;
+    height: $nav_stripe_heigt;
+    margin-top: 0px;
+    margin-bottom:3px;
+    }
+   
