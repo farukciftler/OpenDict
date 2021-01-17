@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card p-2">
+            <h4>Register</h4>
+            <hr />
+            <form>
+                <small>Username</small>
+                <input type="text" class="form-control" name="username" />
+                <small>Password</small>
+                <input type="password" class="form-control" name="password" />
+                <small>email</small>
+                <input type="email" class="form-control" name="email" />
+
+                <button type="button" class="btn-success mt-2">Register</button>
+            </form>
+            <small><a href="/home/login">Already registered?</a></small>
+        </div>
+    </div>
+</div>

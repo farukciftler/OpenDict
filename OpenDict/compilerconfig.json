@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "wwwroot/assets/css/custom/_base.css",
+    "inputFile": "wwwroot/assets/css/custom/_base.scss"
+  },
+  {
+    "outputFile": "wwwroot/assets/css/custom/style.css",
+    "inputFile": "wwwroot/assets/css/custom/style.scss"
+  }
+]

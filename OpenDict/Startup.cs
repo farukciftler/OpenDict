@@ -33,7 +33,10 @@ namespace OpenDict
             {
                 options.UseMySQL("Server=localhost;Database=OpenDict;Uid=root;");
                 });
-           
+
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+
         }
 
 

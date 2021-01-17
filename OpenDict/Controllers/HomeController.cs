@@ -21,6 +21,17 @@ namespace OpenDict.Controllers
             return View(localeStringResources);*/
             return View();
         }
+        
+        [Route("Login")]
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [Route("Register")]
+        public ActionResult Register()
+        {
+            return View();
+        }
 
     }
 }

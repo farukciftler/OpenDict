@@ -1,24 +1,56 @@
-﻿<hr class="top-strip" />
+﻿@{
+    ViewData["Brand"] = "opendict";
+}
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<hr class="top-strip" />
 
-    <a class="navbar-brand" href="#">@ViewBag.Brand</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light  align-middle">
+
+    <a class="navbar-brand" href="/home">@ViewBag.Brand</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+    <style>
+        input[type=search] {
+            width: 130px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            //padding: 12px 20px 12px 40px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+            transition-timing-function: ease-in-out;
+            transition: width 2s, height 2s, transform 2s;
+            margin-top: auto;
+        }
+
+            input[type=search]:focus {
+                width: 50vh;
+                -webkit-transition: width 0.4s ease-in-out;
+                transition: width 0.4s ease-in-out;
+            }
+            input[type=search]:hover {
+                width: 50vh;
+                -webkit-transition: width 0.4s ease-in-out;
+                transition: width 0.4s ease-in-out;
+                transition-timing-function: ease-in-out;
+                transition: width 2s, height 2s, transform 2s;
+            }
+    </style>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-        <form class="form-inline justify-content-center w-100">
-            <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-4 my-sm-0" type="submit">S</button>
+        <form class="form-inline justify-content-center w-100  h-100 align-middle">
+            <input class=" mr-sm-1" type="search" placeholder="Search" aria-label="Search">
+            <!--<button class="btn btn-outline-success my-4 my-sm-0" type="submit">S</button> -->
         </form>
-        <ul class="navbar-nav ml-auto" ">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">user.name <span class="sr-only">(current)</span></a>
-            </li>
+
+        <a class="nav-link" href="#">user.name <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/home/login">login</a>
+        <a class="nav-link" href="/home/register">register</a>
 
 
-        </ul>
     </div>
 </nav>
 

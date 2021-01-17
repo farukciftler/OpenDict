@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card p-2">
+            <h4>User Login</h4>
+            <hr />
+            <form>
+                <small>Username</small>
+                <input type="text" class="form-control" name="username" />
+                <small>Password</small>
+                <input type="password" class="form-control" name="password" />
+                <button type="button" class="btn-success mt-2">Login</button>
+            </form>
+            <small><a href="#">Forgot?</a> | <a href="/home/register">Register</a></small>
+        </div>
+    </div>
+</div>
