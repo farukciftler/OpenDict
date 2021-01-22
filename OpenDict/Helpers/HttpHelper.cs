@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -9,26 +10,26 @@ namespace OpenDict.Helpers
     public class HttpHelper
     {
         readonly IConfiguration configuration;
-
-        public HttpHelper (IConfiguration configuration)
+        readonly HttpContextAccessor _httpContextAccessor;
+        public HttpHelper (IConfiguration configuration, HttpContextAccessor httpContextAccessor)
         {
             this.configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public T GetApiEndpoint<T>(string apiendpoint)
         {
-
-
-            IRestClient restClient = new RestClient();
-            IRestRequest restRequest = new RestRequest(configuration["ApiAddress"] + apiendpoint);
+            var url = "http://" + _httpContextAccessor.HttpContext.Request.Host + apiendpoint;
+            IRestClient restClient = new RestClient(url);
+            IRestRequest restRequest = new RestRequest();
             var restResponse = restClient.Get(restRequest);
-            var deserializedobject = JsonConvert.DeserializeObject<T>(restResponse.Content);
+            var deserializedObject = JsonConvert.DeserializeObject<T>(restResponse.Content);
 
-            return deserializedobject;
+            return deserializedObject;
         }
         public T PostMethod<T>(object obj, string uri, string bearerToken = null, Dictionary<string, string> headers = null)
         {
-            var client = new RestClient(configuration["ApiAddress"] + uri);
+            var client = new RestClient( uri);
             var request = new RestRequest(Method.POST) { RequestFormat = DataFormat.Json };
             if (bearerToken != null)
             {

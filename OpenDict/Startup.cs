@@ -6,6 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using OpenDict.Data;
 using OpenDict.Helpers;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace OpenDict
 {
@@ -28,7 +30,8 @@ namespace OpenDict
 
             services.AddScoped<LocalizationHelper>();
             services.AddScoped<HttpHelper>();
-
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<HttpContextAccessor>();
             services.AddDbContext<Context>(options =>
             {
                 options.UseMySQL("Server=localhost;Database=OpenDict;Uid=root;");
