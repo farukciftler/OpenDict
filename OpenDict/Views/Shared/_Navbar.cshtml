@@ -1,12 +1,10 @@
-﻿@{
-    ViewData["Brand"] = "opendict";
-}
+﻿@inject OpenDict.Helpers.LocalizationHelper Localization
 
 <hr class="top-strip" />
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light  align-middle">
 
-    <a class="navbar-brand" href="/home">@ViewBag.Brand</a>
+    <a class="navbar-brand" href="/home">@Localization.T("navbar.brand.title")</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -42,13 +40,13 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
         <form class="form-inline justify-content-center w-100  h-100 align-middle">
-            <input class=" mr-sm-1" type="search" placeholder="Search" aria-label="Search">
+            <input class=" mr-sm-1" type="search" placeholder="@Localization.T("navbar.searchbar.search")" aria-label="Search">
             <!--<button class="btn btn-outline-success my-4 my-sm-0" type="submit">S</button> -->
         </form>
 
         <a class="nav-link" href="#">user.name <span class="sr-only">(current)</span></a>
-        <a class="nav-link" href="/home/login">login</a>
-        <a class="nav-link" href="/home/register">register</a>
+        <a class="nav-link" href="/home/login">@Localization.T("navbar.brand.login")</a>
+        <a class="nav-link" href="/home/register">@Localization.T("navbar.brand.register")</a>
 
 
     </div>
