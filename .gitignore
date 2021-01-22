@@ -1,3 +1,6 @@
 OpenDict/bin/
 OpenDict/obj/
 .vs/OpenDict/config/applicationhost.config
+OpenDict/OpenDict.csproj
+.vs/OpenDict/v16/.suo
+.vs/OpenDict/DesignTimeBuild/.dtbcache.v2
