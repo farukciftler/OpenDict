@@ -23,12 +23,15 @@ namespace OpenDict.Helpers
         {
             var url =   "/api/localestringresources/locale/" + $"?localeString={localeString}&languageId={_configuration["Language:LanguageId"]}";
             var localeStringResource = _httpHelper.GetApiEndpoint<LocaleStringResourcesModel>(url);
-            if(localeStringResource.Text != null)
+            if(localeStringResource == null)
+            {
+                url = "/api/localestringresources/locale/" + $"?localeString={localeString}&languageId=1";
+                localeStringResource = _httpHelper.GetApiEndpoint<LocaleStringResourcesModel>(url);
+                return localeStringResource.LocaleString;
+            }
+            else
             {
                 return localeStringResource.Text;
-            }else
-            {
-                return "";
             }
             
         }

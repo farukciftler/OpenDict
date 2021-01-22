@@ -50,7 +50,13 @@ namespace OpenDict
             {
                 app.UseDeveloperExceptionPage();
             }
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<Context>();
+                context.Database.Migrate();
+                context.Database.EnsureCreated();
 
+            }
             app.UseRouting();
             
             app.UseAuthorization();

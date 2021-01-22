@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-
 namespace OpenDict.Data
 {
     public class Context : DbContext
@@ -16,6 +15,8 @@ namespace OpenDict.Data
 
         public DbSet<OpenDict.Models.LanguageModel> Language { get; set; }
         public DbSet<OpenDict.Models.LocaleStringResourcesModel> LocaleStringResources { get; set; }
+        public DbSet<OpenDict.Models.UserModel> Users { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

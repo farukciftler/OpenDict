@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 22 Oca 2021, 12:56:36
+-- Üretim Zamanı: 22 Oca 2021, 16:12:26
 -- Sunucu sürümü: 10.4.14-MariaDB
 -- PHP Sürümü: 7.2.34
 
@@ -65,7 +65,6 @@ INSERT INTO `localestringresources` (`Id`, `LocaleString`, `LanguageId`, `Text`)
 (5, 'Login.Text.UserLogin', 1, 'User Login'),
 (6, 'Login.Text.UserLogin', 2, 'Kullanıcı Girişi'),
 (7, 'Login.Text.Username', 1, 'Username'),
-(8, 'Login.Text.Username', 2, 'Kullanıcı Adı'),
 (9, 'Login.Text.Password', 1, 'Password'),
 (10, 'Login.Text.Password', 2, 'Şifre'),
 (11, 'Login.Text.Forgot', 1, 'Forgot?'),
@@ -91,7 +90,64 @@ INSERT INTO `localestringresources` (`Id`, `LocaleString`, `LanguageId`, `Text`)
 (31, 'Login.Register.RegisterText', 1, 'Register'),
 (32, 'Login.Register.RegisterText', 2, 'Kayıt Ol'),
 (33, 'Login.Register.AlreadyRegistered', 1, 'Already Registered?'),
-(34, 'Login.Register.AlreadyRegistered', 2, 'Zaten bir hesabım var');
+(34, 'Login.Register.AlreadyRegistered', 2, 'Zaten bir hesabım var'),
+(35, 'Login.Text.Username', 2, 'Kullanıcı Adı');
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `usergroup`
+--
+
+CREATE TABLE `usergroup` (
+  `Id` int(11) NOT NULL,
+  `UserGroup` varchar(20) NOT NULL,
+  `Language` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `users`
+--
+
+CREATE TABLE `users` (
+  `Id` int(11) NOT NULL,
+  `Username` varchar(55) NOT NULL,
+  `Email` varchar(55) NOT NULL,
+  `Password` varchar(55) NOT NULL,
+  `Token` varchar(55) NOT NULL,
+  `RegisterDate` datetime NOT NULL,
+  `RegisterIp` varchar(55) NOT NULL,
+  `UserGroupId` int(11) NOT NULL,
+  `EntryCount` int(11) NOT NULL,
+  `UserStatusId` int(11) NOT NULL,
+  `LastOnlineDate` datetime NOT NULL,
+  `Activation` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `userstatus`
+--
+
+CREATE TABLE `userstatus` (
+  `Id` int(11) NOT NULL,
+  `UserStatus` varchar(55) NOT NULL,
+  `Language` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `__efmigrationshistory`
+--
+
+CREATE TABLE `__efmigrationshistory` (
+  `MigrationId` varchar(150) NOT NULL,
+  `ProductVersion` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -110,6 +166,30 @@ ALTER TABLE `localestringresources`
   ADD PRIMARY KEY (`Id`);
 
 --
+-- Tablo için indeksler `usergroup`
+--
+ALTER TABLE `usergroup`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Tablo için indeksler `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Tablo için indeksler `userstatus`
+--
+ALTER TABLE `userstatus`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Tablo için indeksler `__efmigrationshistory`
+--
+ALTER TABLE `__efmigrationshistory`
+  ADD PRIMARY KEY (`MigrationId`);
+
+--
 -- Dökümü yapılmış tablolar için AUTO_INCREMENT değeri
 --
 
@@ -123,7 +203,25 @@ ALTER TABLE `language`
 -- Tablo için AUTO_INCREMENT değeri `localestringresources`
 --
 ALTER TABLE `localestringresources`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- Tablo için AUTO_INCREMENT değeri `usergroup`
+--
+ALTER TABLE `usergroup`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Tablo için AUTO_INCREMENT değeri `users`
+--
+ALTER TABLE `users`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Tablo için AUTO_INCREMENT değeri `userstatus`
+--
+ALTER TABLE `userstatus`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
