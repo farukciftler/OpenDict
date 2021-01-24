@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 22 Oca 2021, 16:12:26
+-- Üretim Zamanı: 24 Oca 2021, 12:37:56
 -- Sunucu sürümü: 10.4.14-MariaDB
 -- PHP Sürümü: 7.2.34
 
@@ -91,7 +91,11 @@ INSERT INTO `localestringresources` (`Id`, `LocaleString`, `LanguageId`, `Text`)
 (32, 'Login.Register.RegisterText', 2, 'Kayıt Ol'),
 (33, 'Login.Register.AlreadyRegistered', 1, 'Already Registered?'),
 (34, 'Login.Register.AlreadyRegistered', 2, 'Zaten bir hesabım var'),
-(35, 'Login.Text.Username', 2, 'Kullanıcı Adı');
+(35, 'Login.Text.Username', 2, 'Kullanıcı Adı'),
+(36, 'Login.SuccessfullyLogin', 2, 'Başarıyla giriş yaptınız.'),
+(37, 'Login.SuccessfullyLogin', 1, 'You have successfully logged in.'),
+(38, 'Login.UnsuccessfullyLogin.UsernameOrPassword', 1, 'Your username or password is incorrect!'),
+(39, 'Login.UnsuccessfullyLogin.UsernameOrPassword', 2, 'Kullanıcı adınız veya şifreniz hatalı!');
 
 -- --------------------------------------------------------
 
@@ -101,8 +105,9 @@ INSERT INTO `localestringresources` (`Id`, `LocaleString`, `LanguageId`, `Text`)
 
 CREATE TABLE `usergroup` (
   `Id` int(11) NOT NULL,
+  `Level` int(11) NOT NULL,
   `UserGroup` varchar(20) NOT NULL,
-  `Language` int(11) NOT NULL
+  `LanguageId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -113,18 +118,25 @@ CREATE TABLE `usergroup` (
 
 CREATE TABLE `users` (
   `Id` int(11) NOT NULL,
-  `Username` varchar(55) NOT NULL,
-  `Email` varchar(55) NOT NULL,
-  `Password` varchar(55) NOT NULL,
-  `Token` varchar(55) NOT NULL,
-  `RegisterDate` datetime NOT NULL,
-  `RegisterIp` varchar(55) NOT NULL,
-  `UserGroupId` int(11) NOT NULL,
-  `EntryCount` int(11) NOT NULL,
-  `UserStatusId` int(11) NOT NULL,
-  `LastOnlineDate` datetime NOT NULL,
-  `Activation` int(11) NOT NULL
+  `Username` varchar(55) DEFAULT NULL,
+  `Email` varchar(55) DEFAULT NULL,
+  `Password` varchar(55) DEFAULT NULL,
+  `Token` varchar(55) DEFAULT NULL,
+  `RegisterDate` datetime DEFAULT NULL,
+  `RegisterIp` varchar(55) DEFAULT NULL,
+  `UserGroupLevel` int(11) DEFAULT NULL,
+  `EntryCount` int(11) DEFAULT NULL,
+  `UserStatusId` int(11) DEFAULT NULL,
+  `LastOnlineDate` datetime DEFAULT NULL,
+  `Activation` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Tablo döküm verisi `users`
+--
+
+INSERT INTO `users` (`Id`, `Username`, `Email`, `Password`, `Token`, `RegisterDate`, `RegisterIp`, `UserGroupLevel`, `EntryCount`, `UserStatusId`, `LastOnlineDate`, `Activation`) VALUES
+(5, 'admin', 'test@admin.com', 'admin', '', '2021-01-24 14:35:27', '', 0, 0, 0, '2021-01-24 11:35:26', 0);
 
 -- --------------------------------------------------------
 
@@ -203,7 +215,7 @@ ALTER TABLE `language`
 -- Tablo için AUTO_INCREMENT değeri `localestringresources`
 --
 ALTER TABLE `localestringresources`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `usergroup`
@@ -215,7 +227,7 @@ ALTER TABLE `usergroup`
 -- Tablo için AUTO_INCREMENT değeri `users`
 --
 ALTER TABLE `users`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `userstatus`

@@ -8,6 +8,7 @@ using OpenDict.Data;
 using OpenDict.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
 
 namespace OpenDict
 {
@@ -38,7 +39,14 @@ namespace OpenDict
                 });
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddDistributedMemoryCache();
 
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
         }
 
@@ -58,11 +66,15 @@ namespace OpenDict
 
             }
             app.UseRouting();
-            
-            app.UseAuthorization();
+
+          
 
             app.UseStaticFiles();
+            app.UseAuthentication();
 
+            app.UseAuthorization(); 
+
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

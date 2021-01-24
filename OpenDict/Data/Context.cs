@@ -16,6 +16,8 @@ namespace OpenDict.Data
         public DbSet<OpenDict.Models.LanguageModel> Language { get; set; }
         public DbSet<OpenDict.Models.LocaleStringResourcesModel> LocaleStringResources { get; set; }
         public DbSet<OpenDict.Models.UserModel> Users { get; set; }
+        public DbSet<OpenDict.Models.UserGroupModel> UserGroup { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

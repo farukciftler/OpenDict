@@ -9,7 +9,7 @@
         <div class="card p-2">
             <h4>@Localization.T("Login.Text.Register")</h4>
             <hr />
-            <form>
+            <form method="post" action="/Login/Register">
                 <small>@Localization.T("Login.Register.Username")</small>
                 <input type="text" class="form-control" name="username" />
                 <small>@Localization.T("Login.Register.Password")</small>
@@ -17,7 +17,7 @@
                 <small>@Localization.T("Login.Register.Email")</small>
                 <input type="email" class="form-control" name="email" />
 
-                <button type="button" class="btn-success mt-2">@Localization.T("Login.Register.RegisterText")</button>
+                <button type="submit"  class="btn-success mt-2">@Localization.T("Login.Register.RegisterText")</button>
             </form>
             <small><a href="/home/login">@Localization.T("Login.Register.AlreadyRegistered")</a></small>
         </div>

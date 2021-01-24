@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,8 @@ namespace OpenDict.Helpers
         }
         public T PostMethod<T>(object obj, string uri, string bearerToken = null, Dictionary<string, string> headers = null)
         {
-            var client = new RestClient( uri);
+            var url = "http://" + _httpContextAccessor.HttpContext.Request.Host + uri;
+            var client = new RestClient( url);
             var request = new RestRequest(Method.POST) { RequestFormat = DataFormat.Json };
             if (bearerToken != null)
             {
@@ -48,7 +50,7 @@ namespace OpenDict.Helpers
             return result;
         }
 
-        private  T GetResult<T>(RestClient client, RestRequest request, object obj = null, Dictionary<string, string> headers = null)
+        private static T GetResult<T>(RestClient client, RestRequest request, object obj = null, Dictionary<string, string> headers = null)
         {
 
             if (headers != null) //Add headers to request if header exists
@@ -71,6 +73,24 @@ namespace OpenDict.Helpers
 
             return JsonConvert.DeserializeObject<T>(response.Content, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
+        }
+
+        public string GetToken(string username, string password)
+        {
+
+            IRestClient restClient = new RestClient();
+            IRestRequest restRequest = new RestRequest($"/login?username={username}&password={password}");
+            var restResponse = restClient.Get(restRequest);
+            string token = null;
+            if (restResponse.Content != "")
+            {
+                var jObject = JObject.Parse(restResponse.Content);
+                if (jObject.GetValue("token") != null)
+                {
+                    token = jObject.GetValue("token").ToString();
+                }
+            }
+            return token;
         }
     }
 }
