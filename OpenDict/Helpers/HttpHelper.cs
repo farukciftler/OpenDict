@@ -10,11 +10,9 @@ namespace OpenDict.Helpers
 {
     public class HttpHelper
     {
-        readonly IConfiguration configuration;
         readonly HttpContextAccessor _httpContextAccessor;
-        public HttpHelper (IConfiguration configuration, HttpContextAccessor httpContextAccessor)
+        public HttpHelper ( HttpContextAccessor httpContextAccessor)
         {
-            this.configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -77,9 +75,9 @@ namespace OpenDict.Helpers
 
         public string GetToken(string username, string password)
         {
-
+            var url = "http://" + _httpContextAccessor.HttpContext.Request.Host+ $"/api/auth/login?username={username}&password={password}";
             IRestClient restClient = new RestClient();
-            IRestRequest restRequest = new RestRequest($"/login?username={username}&password={password}");
+            IRestRequest restRequest = new RestRequest(url);
             var restResponse = restClient.Get(restRequest);
             string token = null;
             if (restResponse.Content != "")

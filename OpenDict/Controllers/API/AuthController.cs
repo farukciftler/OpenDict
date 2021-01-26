@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OpenDict.Controllers.API
 {
@@ -24,14 +26,15 @@ namespace OpenDict.Controllers.API
             _config = config;
             _context = context;
         }
-
+        [Route("Login")]
+        [HttpGet]
         public IActionResult Login(string username, string password)
         {
 
             UserModel login = new UserModel
             {
                 Username = username,
-                Password = password
+                Password = HashPasswordUsingMD5(password)
             };
 
             IActionResult response = Unauthorized();
@@ -45,6 +48,15 @@ namespace OpenDict.Controllers.API
             }
             return response;
         }
+
+        [Route("GetUser")]
+        [HttpPost]
+        public UserModel GetUser(UserModel userModel)
+        {
+            userModel.Password = HashPasswordUsingMD5(userModel.Password);
+            userModel = _context.Users.Where(q => q.Username == userModel.Username && q.Password == userModel.Password).FirstOrDefault();
+            return userModel;
+        }
         private UserModel AuthenticateUser(UserModel login)
         {
             var UserInfo = _context.Users.Where(s => (s.Username == login.Username))
@@ -57,12 +69,22 @@ namespace OpenDict.Controllers.API
             }
             return user;
         }
-        private string GenerateJSONWebToken(UserModel userInfo)
+        
+        private IActionResult GenerateJSONWebToken(UserModel userInfo)
+
+
         {
             var user = _context.Users.Where(s => (s.Username == userInfo.Username)).FirstOrDefault();
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var userLevel = _context.UserGroup.Where(s => (s.Level == user.UserGroupLevel)).FirstOrDefault();
+            //var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            //var keySize = credentials.Key.KeySize;
+
+
+            var userLevel = 
+                _context
+                .UserGroup
+                .Where(s => (s.Level == user.UserGroupLevel && s.LanguageId == 1))
+                .FirstOrDefault();
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userInfo.Username),
@@ -76,13 +98,32 @@ namespace OpenDict.Controllers.API
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Issuer"],
                 claims,
-                expires: DateTime.Now.AddMinutes(120),
-                signingCredentials: credentials);
+                expires: DateTime.Now.AddMinutes(120)
+                //signingCredentials: credentials
+                );
 
 
 
-            var encodeToken = new JwtSecurityTokenHandler().WriteToken(token);
-            return encodeToken;
+            return Ok(new
+            {
+                token = new JwtSecurityTokenHandler().WriteToken(token),
+                expiration = token.ValidTo
+            });
+            return Unauthorized();
+        }
+        private string generateJwtToken(UserModel userModel)
+        {
+            // generate token that is valid for 7 days
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_config["Jwt:Key"]);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[] { new Claim("id", userModel.Id.ToString()) }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
 
         [Route("Register")]
@@ -90,11 +131,24 @@ namespace OpenDict.Controllers.API
         public async Task<ActionResult<UserModel>> Register(UserModel userModel)
         {
             userModel.RegisterDate = DateTime.Now;
+            userModel.Password = HashPasswordUsingMD5(userModel.Password);
             _context.Users.Add(userModel);
             await _context.SaveChangesAsync();
+            return CreatedAtAction("GetUserModel", new { userModel.Id }, userModel);
+        }
+        public static string HashPasswordUsingMD5(string password)
+        {
+            using var md5 = MD5.Create();
+            byte[] passwordBytes = Encoding.ASCII.GetBytes(password);
 
+            byte[] hash = md5.ComputeHash(passwordBytes);
 
-            return CreatedAtAction("GetUserModel", new { Id = userModel.Id }, userModel);
+            var stringBuilder = new StringBuilder();
+
+            for (int i = 0; i < hash.Length; i++)
+                stringBuilder.Append(hash[i].ToString("X2"));
+
+            return stringBuilder.ToString();
         }
 
     }

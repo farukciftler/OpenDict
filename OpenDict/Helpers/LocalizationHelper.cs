@@ -7,16 +7,12 @@ namespace OpenDict.Helpers
 {
     public class LocalizationHelper
     {
-        private readonly Context _context;
         private readonly IConfiguration _configuration;
         private readonly HttpHelper _httpHelper;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        public LocalizationHelper(Context context, IConfiguration configuration, HttpHelper httpHelper, IHttpContextAccessor httpContextAccessor)
+        public LocalizationHelper( IConfiguration configuration, HttpHelper httpHelper)
         {
-            _context = context;
             _configuration = configuration;
             _httpHelper = httpHelper;
-            _httpContextAccessor = httpContextAccessor;
         }
 
         public string T(string localeString)
