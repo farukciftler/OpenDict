@@ -1,16 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.Configuration;
+using System.IO;
 
 namespace OpenDict.Data
 {
     public class Context : DbContext
     {
 
+        private readonly string _connectionString;
 
-        public Context (DbContextOptions<Context> options)
+        public Context (DbContextOptions<Context> options )
             
         {
             Database.EnsureCreated();
-
         }
 
         public DbSet<OpenDict.Models.LanguageModel> Language { get; set; }
@@ -22,7 +25,13 @@ namespace OpenDict.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("Server=localhost;Database=OpenDict;Uid=root;");
+            var builder = new ConfigurationBuilder()
+           .SetBasePath(Directory.GetCurrentDirectory())
+           .AddJsonFile("appsettings.json");
+            var configuration = builder.Build();
+
+            string connectionString = configuration.GetConnectionString("DefaultConnection");
+            optionsBuilder.UseMySQL(connectionString);
         }
 
     }

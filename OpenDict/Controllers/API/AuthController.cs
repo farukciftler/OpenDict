@@ -109,7 +109,6 @@ namespace OpenDict.Controllers.API
                 token = new JwtSecurityTokenHandler().WriteToken(token),
                 expiration = token.ValidTo
             });
-            return Unauthorized();
         }
 
         [Route("Register")]
