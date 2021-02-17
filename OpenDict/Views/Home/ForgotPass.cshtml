@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    @inject OpenDict.Helpers.LocalizationHelper Localization;
+
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card p-2">
+            <h4>@Localization.T("ForgotPass.Text.UserLogin")</h4>
+            <hr />
+            <form action="" method="POST">
+                <small>@Localization.T("Login.Register.Email")</small>
+                <input type="email" class="form-control" name="email" />
+               
+                <button type="submit" class="btn-success mt-2">send my pass</button>
+            </form>
+            <small><a href="/home/register">@Localization.T("Login.Text.Register")</a> | <a href="/home/login">@Localization.T("Login.Register.AlreadyRegistered")</a></small>
+            
+
+        </div>
+    </div>
+</div>
