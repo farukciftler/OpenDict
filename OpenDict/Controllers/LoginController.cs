@@ -53,7 +53,6 @@ namespace OpenDict.Controllers
             }
 
             ViewBag.Name = HttpContext.Session.GetString("_username");
-            ViewBag.Pass = HttpContext.Session.GetString("_password");
             return View("../Home/Index");
 
         }
@@ -70,6 +69,12 @@ namespace OpenDict.Controllers
             };
             return _httpHelper.PostMethod<UserModel>(newUser, "/api/auth/register");
         }
+        public ActionResult Exit()
+        {
+            HttpContext.Session.Clear();
+            return View("../Home/Index");
+        }
+
 
 
 

@@ -44,9 +44,19 @@
             <!--<button class="btn btn-outline-success my-4 my-sm-0" type="submit">S</button> -->
         </form>
 
-        <a class="nav-link" href="#">user.name <span class="sr-only">(current)</span></a>
-        <a class="nav-link" href="/home/login">@Localization.T("navbar.brand.login")</a>
-        <a class="nav-link" href="/home/register">@Localization.T("navbar.brand.register")</a>
+
+        @if (ViewBag.Name == null)
+        {
+            <a class="nav-link" href="/home/login">@Localization.T("navbar.brand.login")</a>
+            <a class="nav-link" href="/home/register">@Localization.T("navbar.brand.register")</a>
+        }
+        else
+        {
+            <a class="nav-link" href="#">@ViewBag.Name <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/login/exit">@Localization.T("navbar.brand.exit")</a>
+        }
+
+
 
 
     </div>
