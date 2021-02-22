@@ -35,7 +35,7 @@ namespace OpenDict
             services.AddScoped<HttpContextAccessor>();
             services.AddDbContext<Context>(options =>
             {
-                options.UseMySQL("Server=localhost;Database=OpenDict;Uid=root;");
+                options.UseMySQL("Server=kodyazalim.com;user=root;database=opendict;port=3306;password=sifreyiunutma;");
                 });
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();

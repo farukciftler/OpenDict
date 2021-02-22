@@ -31,5 +31,11 @@ namespace OpenDict.Controllers
             return View();
         }
 
+        [Route("Forgot")]
+
+        public ActionResult ForgotPass()
+        {
+            return View();
+        }
     }
 }
